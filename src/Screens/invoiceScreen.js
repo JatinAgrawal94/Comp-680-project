@@ -1,30 +1,20 @@
 import { useState } from "react";
 import InvoiceComponent from "../Components/invoiceComponent";
+import React from 'react';
 
 export default function InvoiceScreen(){
-    
     const [order,updateOrder]=useState([]);
-    console.log(order)
-    
     const addtoOrder=(e)=>{
-        // var o=order;
-        e.preventDefault();
-        var o=order;
-        console.log(o)
+        // e.preventDefault();
         var medicine_name
         var medicine_count;
-       
         try{
-            // console.log(order);
              medicine_name=document.getElementById('medicine-name').value.toString()
              medicine_count=document.getElementById('medicine-count').value.toString()
-             o.push({
-                 'medicine-name':medicine_name,
-                 'medicine-count':medicine_count
-             })
-            //  console.log(o[0])
-             updateOrder(o);
-             
+             updateOrder([...order,{'medicine_name':medicine_name,
+             'medicine_count':medicine_count}]);
+             document.getElementById('medicine-name').value="";
+             document.getElementById('medicine-count').value="";
         }catch(err){
             console.log("This is error");
             console.log(err);   
@@ -33,20 +23,19 @@ export default function InvoiceScreen(){
     }
     return (
         <div className="container h-100">
-            <form>
+            {/* <form> */}
             <div className="row">
                 <div className="col h-100 border-end">
                     <label className="form-label">Full Name</label>
-                    <input className="form-control" type="text"/>
+                    <input className="form-control" type="text" />
                     <label className="form-label">Email</label>
                     <input className="form-control" type="email"/>
                     <label className="form-label">Insurance information</label>
                     <input className="form-control" type="text"/>
                 </div>
-                {/* <span className="h-100 border-end"></span> */}
                 <div className="col-10">
                     <div className="d-flex justify-content-around">
-                        <input placeholder="Search" className="input-group mx-2" id="medicine-name"/>
+                        <input placeholder="Search" className="input-group mx-2" id="medicine-name" />
                         <input placeholder="Count" className="input-group mx-2" id="medicine-count"/>
                         <button className="btn btn-primary" onClick={addtoOrder}>Add</button>
                     </div>
@@ -55,19 +44,19 @@ export default function InvoiceScreen(){
                         <p>Count</p>
                         <p>Price</p>
                     </div>
-                    <div className="d-flex justify-content-around">
+                    <div className="d-flex align-content-around flex-column">
                     {
-                        // order!==undefined && order!==null && order !== ""? order.map((e,index)=>{
-                        //     return <InvoiceComponent key={index} props={e}/>
-                        // }): <p>Loading</p>
+                         order ? order.map((e,index)=>{
+                            return <InvoiceComponent key={index} props={e}/>
+                        }): <p>Loading</p>
                     }
-                    </div>
+                    </div> 
                     <div className="text-right">
                         <button className="btn btn-success right">Checkout</button>
                     </div>
                 </div>
             </div>
-            </form>
+            {/* </form> */}
         </div>
     );
 }

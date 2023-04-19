@@ -1,0 +1,51 @@
+import {ORDER_CREATE_FAILED, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS,ORDER_CANCEL_REQUEST,ORDER_CANCEL_SUCCESS,ORDER_CANCEL_FAILED,ALL_ORDER_READ_REQUEST,ALL_ORDER_READ_SUCCESS,ALL_ORDER_READ_FAILED,ORDER_READ_REQUEST,ORDER_READ_SUCCESS,ORDER_READ_FAILED} from '../constants/orderConstants';
+
+export const orderCreateReducer=(state={},action)=>{
+    switch(action.type){
+        case ORDER_CREATE_REQUEST:
+            return {loading:true};
+        case ORDER_CREATE_SUCCESS:
+            return {loading:false,success:true}
+        case ORDER_CREATE_FAILED:
+            return {loading:false,error:action.payload};
+        default: return state;        
+    }
+}
+
+
+export const orderCancelReducer=(state={},action)=>{
+    switch(action.type){
+        case ORDER_CANCEL_REQUEST:
+            return {loading:true};
+        case ORDER_CANCEL_SUCCESS:
+            return {loading:false,success:true}
+        case ORDER_CANCEL_FAILED:
+            return {loading:false,error:action.payload};
+        default: return state;        
+    }
+}
+
+export const allOrderReadReducer=(state={},action)=>{
+    switch(action.type){
+        case ALL_ORDER_READ_REQUEST:
+            return {loading:true};
+        case ALL_ORDER_READ_SUCCESS:
+            return {loading:false,success:true}
+        case ALL_ORDER_READ_FAILED:
+            return {loading:false,error:action.payload};
+        default: return state;        
+    }
+}
+
+export const orderReadReducer=(state={},action)=>{
+    switch(action.type){
+        case ORDER_READ_REQUEST:
+            return {loading:true};
+        case ORDER_READ_SUCCESS:
+            return {loading:false,success:true}
+        case ORDER_READ_FAILED:
+            return {loading:false,error:action.payload};
+        default: return state;        
+    }
+}
+
