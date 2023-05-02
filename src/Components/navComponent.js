@@ -9,6 +9,7 @@ export default function NavComponent(){
                 <Link to='/orders' className="text-decoration-none text-dark">Orders</Link>
                 <Link to='/addinventory' className="text-decoration-none text-dark">New</Link>
                 <Link to='/viewinventory' className="text-decoration-none text-dark">View</Link>
+                <Link to='/order/create' className="text-decoration-none text-dark">CreateOrder</Link>
                 <Link to='/login' className="text-decoration-none text-dark">Login</Link>
         </nav>
     )

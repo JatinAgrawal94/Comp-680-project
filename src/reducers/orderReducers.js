@@ -30,7 +30,7 @@ export const allOrderReadReducer=(state={},action)=>{
         case ALL_ORDER_READ_REQUEST:
             return {loading:true};
         case ALL_ORDER_READ_SUCCESS:
-            return {loading:false,success:true}
+            return {loading:false,success:true,orders:action.payload}
         case ALL_ORDER_READ_FAILED:
             return {loading:false,error:action.payload};
         default: return state;        
@@ -42,7 +42,7 @@ export const orderReadReducer=(state={},action)=>{
         case ORDER_READ_REQUEST:
             return {loading:true};
         case ORDER_READ_SUCCESS:
-            return {loading:false,success:true}
+            return {loading:false,success:true,order:action.payload}
         case ORDER_READ_FAILED:
             return {loading:false,error:action.payload};
         default: return state;        

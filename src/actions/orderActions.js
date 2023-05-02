@@ -1,10 +1,10 @@
-import { Axios } from "axios";
-import { ORDER_CREATE_REQUEST,ORDER_CREATE_SUCCESS,ORDER_CREATE_FAILED, ALL_ORDER_READ_REQUEST, ALL_ORDER_READ_SUCCESS, ALL_ORDER_READ_FAILED, ORDER_CANCEL_REQUEST, ORDER_CANCEL_SUCCESS } from "../constants/orderConstants"
+import  Axios  from "axios";
+import { ORDER_CREATE_REQUEST,ORDER_CREATE_SUCCESS,ORDER_CREATE_FAILED, ALL_ORDER_READ_REQUEST, ALL_ORDER_READ_SUCCESS, ALL_ORDER_READ_FAILED, ORDER_CANCEL_REQUEST, ORDER_CANCEL_SUCCESS, ORDER_READ_REQUEST, ORDER_READ_SUCCESS, ORDER_READ_FAILED } from "../constants/orderConstants"
 
 export const orderCreateAction=(order)=>async(dispatch,getState)=>{
     dispatch({type:ORDER_CREATE_REQUEST,payload:{}});
     try {
-        const {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/order/new`,order);
+        const {data}=await Axios.post(`http://localhost:5000/api/order/new`,order);
         dispatch({type:ORDER_CREATE_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:ORDER_CREATE_FAILED,payload:error.message})
@@ -16,7 +16,7 @@ export const orderCreateAction=(order)=>async(dispatch,getState)=>{
 export const allOrderReadAction=()=>async(dispatch,getState)=>{
     dispatch({type:ALL_ORDER_READ_REQUEST,payload:{}});
     try {
-        const {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/order/read`,order);
+        const {data}=await Axios.get(`http://localhost:5000/api/order/all`);
         dispatch({type:ALL_ORDER_READ_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:ALL_ORDER_READ_FAILED,payload:error.message})
@@ -29,7 +29,7 @@ export const allOrderReadAction=()=>async(dispatch,getState)=>{
 export const orderCancelAction=(orderId)=>async(dispatch,getState)=>{
     dispatch({type:ORDER_CANCEL_REQUEST,payload:{}})
     try {
-        const {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/order/read`,orderId);
+        const {data}=await Axios.post(`http://localhost:5000/api/order/cancel/${orderId}`,orderId);
         dispatch({type:ORDER_CANCEL_SUCCESS,payload:data})
     } catch (error) {
         dispatch({type:ORDER_CREATE_FAILED,payload:error.message})
@@ -38,10 +38,10 @@ export const orderCancelAction=(orderId)=>async(dispatch,getState)=>{
 
 // get orders for a specific user. for that I have to prepare some sort of userID.
 
-export const orderReadAction=()=>async(dispatch,getState)=>{
+export const orderReadAction=(id)=>async(dispatch,getState)=>{
     dispatch({type:ORDER_READ_REQUEST,payload:{}});
     try {
-        const {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/order/read`,order);
+        const {data}=await Axios.get(`http://localhost:5000/api/order/read/${id}`);
         dispatch({type:ORDER_READ_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:ORDER_READ_FAILED,payload:error.message})

@@ -9,6 +9,8 @@ import AddInventoryScreen from './Screens/addInventoryScreen';
 import InventoryViewScreen from './Screens/inventoryViewScreen';
 import InventoryProfileScreen from './Screens/inventoryProfileScreen';
 import UpdateInventoryScreen from './Screens/updateInventoryScreen';
+import CreateOrderScreen from './Screens/createOrderScreen';
+import OrderInfoScreen from './Screens/orderInfoScreen';
 // import dotenv from 'dotenv'
 
 function App() {
@@ -22,10 +24,12 @@ function App() {
           <Route exact path="/sales" element={<InvoiceScreen/>}/>
           <Route exact path="/login" element={<LoginScreen/>}/>
           <Route exact path="/orders" element={<OrderScreen/>}/>
+          <Route exact path="/orders/:id" element={<OrderInfoScreen/>}/>
           <Route exact path="/addinventory" element={<AddInventoryScreen/>}/>
           <Route exact path="/viewinventory" element={<InventoryViewScreen/>}/>
           <Route exact path="/viewinventory/:id" element={<InventoryProfileScreen/>}/>
           <Route exact path="/updateinventory/:id" element={<UpdateInventoryScreen/>}/>
+          <Route exact path="/order/create" element={<CreateOrderScreen/>}/>
         </Routes>
       </div>
     </Router>
