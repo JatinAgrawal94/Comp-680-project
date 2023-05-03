@@ -4,7 +4,7 @@ import { ORDER_CREATE_REQUEST,ORDER_CREATE_SUCCESS,ORDER_CREATE_FAILED, ALL_ORDE
 export const orderCreateAction=(order)=>async(dispatch,getState)=>{
     dispatch({type:ORDER_CREATE_REQUEST,payload:{}});
     try {
-        const {data}=await Axios.post(`${REACT_APP_BACKEND_URL}/api/order/new`,order);
+        const {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/order/new`,order);
         dispatch({type:ORDER_CREATE_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:ORDER_CREATE_FAILED,payload:error.message})
@@ -16,7 +16,7 @@ export const orderCreateAction=(order)=>async(dispatch,getState)=>{
 export const allOrderReadAction=()=>async(dispatch,getState)=>{
     dispatch({type:ALL_ORDER_READ_REQUEST,payload:{}});
     try {
-        const {data}=await Axios.get(`${REACT_APP_BACKEND_URL}/api/order/all`);
+        const {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/order/all`);
         dispatch({type:ALL_ORDER_READ_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:ALL_ORDER_READ_FAILED,payload:error.message})
@@ -29,7 +29,7 @@ export const allOrderReadAction=()=>async(dispatch,getState)=>{
 export const orderUpdateAction=(orderId,update)=>async(dispatch,getState)=>{
     dispatch({type:ORDER_UPDATE_REQUEST,payload:{}})
     try {
-        const {data}=await Axios.put(`${REACT_APP_BACKEND_URL}/api/order/update/${orderId}`,update);
+        const {data}=await Axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/order/update/${orderId}`,update);
         dispatch({type:ORDER_UPDATE_SUCCESS,payload:data})
     } catch (error) {
         console.log(error); 
@@ -42,7 +42,7 @@ export const orderUpdateAction=(orderId,update)=>async(dispatch,getState)=>{
 export const orderReadAction=(id)=>async(dispatch,getState)=>{
     dispatch({type:ORDER_READ_REQUEST,payload:{}});
     try {
-        const {data}=await Axios.get(`${REACT_APP_BACKEND_URL}/api/order/read/${id}`);
+        const {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/order/read/${id}`);
         dispatch({type:ORDER_READ_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:ORDER_READ_FAILED,payload:error.message})

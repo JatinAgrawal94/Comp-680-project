@@ -4,7 +4,7 @@ import Axios from 'axios';
 export const medicineCreate=(m)=>async(dispatch,getState)=>{
     dispatch({type:MEDICINE_CREATE_REQUEST,payload:{}});
     try {
-        var {data}=await Axios.post(`${REACT_APP_BACKEND_URL}/api/medicine/new`,m);
+        var {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/medicine/new`,m);
         dispatch({type:MEDICINE_CREATE_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:MEDICINE_CREATE_FAILED,payload:error.message})
@@ -15,7 +15,7 @@ export const medicineCreate=(m)=>async(dispatch,getState)=>{
 export const medicineRead=()=>async(dispatch,getState)=>{
     dispatch({type:MEDICINE_READ_REQUEST,payload:{}});
     try {
-        const {data}=await Axios.get(`${REACT_APP_BACKEND_URL}/api/medicine/all`);
+        const {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/medicine/all`);
         dispatch({type:MEDICINE_READ_SUCCESS,payload:data});
         localStorage.setItem('medicines',JSON.stringify(getState().medicineRead.medicines))
     } catch (error) {
@@ -27,7 +27,7 @@ export const medicineRead=()=>async(dispatch,getState)=>{
 export const specificMedicineRead=(id)=>async(dispatch,getState)=>{
     dispatch({type:SPECIFIC_MEDICINE_READ_REQUEST,payload:{}})
     try {
-        const {data}=await Axios.get(`${REACT_APP_BACKEND_URL}/api/medicine/read/${id}`)
+        const {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/medicine/read/${id}`)
         dispatch({type:SPECIFIC_MEDICINE_READ_SUCCESS,payload:data});
         localStorage.setItem('medicine',JSON.stringify(getState().specificMedicineRead.medicine))
     } catch (error) {
@@ -39,7 +39,7 @@ export const medicineUpdate=(m,id)=>async(dispatch,getState)=>{
     dispatch({type:MEDICINE_UPDATE_REQUEST,payload:{}});
     try {
         // here we need to add id for the medicine added.so that we can identify that medicine.
-        const {data}=await Axios.put(`${REACT_APP_BACKEND_URL}/api/medicine/update/${id}`,m);
+        const {data}=await Axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/medicine/update/${id}`,m);
         dispatch({type:MEDICINE_UPDATE_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:MEDICINE_UPDATE_FAILED,payload:error.message})
