@@ -1,4 +1,4 @@
-import {ORDER_CREATE_FAILED, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS,ORDER_CANCEL_REQUEST,ORDER_CANCEL_SUCCESS,ORDER_CANCEL_FAILED,ALL_ORDER_READ_REQUEST,ALL_ORDER_READ_SUCCESS,ALL_ORDER_READ_FAILED,ORDER_READ_REQUEST,ORDER_READ_SUCCESS,ORDER_READ_FAILED} from '../constants/orderConstants';
+import {ORDER_CREATE_FAILED, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS,ALL_ORDER_READ_REQUEST,ALL_ORDER_READ_SUCCESS,ALL_ORDER_READ_FAILED,ORDER_READ_REQUEST,ORDER_READ_SUCCESS,ORDER_READ_FAILED, ORDER_UPDATE_REQUEST, ORDER_UPDATE_SUCCESS, ORDER_UPDATE_FAILED} from '../constants/orderConstants';
 
 export const orderCreateReducer=(state={},action)=>{
     switch(action.type){
@@ -13,13 +13,13 @@ export const orderCreateReducer=(state={},action)=>{
 }
 
 
-export const orderCancelReducer=(state={},action)=>{
+export const orderUpdateReducer=(state={},action)=>{
     switch(action.type){
-        case ORDER_CANCEL_REQUEST:
+        case ORDER_UPDATE_REQUEST:
             return {loading:true};
-        case ORDER_CANCEL_SUCCESS:
+        case ORDER_UPDATE_SUCCESS:
             return {loading:false,success:true}
-        case ORDER_CANCEL_FAILED:
+        case ORDER_UPDATE_FAILED:
             return {loading:false,error:action.payload};
         default: return state;        
     }

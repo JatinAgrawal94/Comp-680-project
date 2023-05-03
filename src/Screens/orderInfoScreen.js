@@ -1,15 +1,31 @@
 import {useSelector,useDispatch} from 'react-redux';
-import React, { useEffect } from "react";
-import { orderReadAction } from '../actions/orderActions';
+import React, { useEffect, useState } from "react";
+import { orderReadAction, orderUpdateAction } from '../actions/orderActions';
 
 export default function OrderInfoScreen(){
     var id=window.location.pathname.split('/')[2];
     const dispatch=useDispatch();
     var {order,loading}=useSelector(state=>state.orderRead);
+    const [change,updateChange]=useState({});
+    const [flag,updateFlag]=useState(0);
+    // console.log(change)
     useEffect(()=>{
         dispatch(orderReadAction(id))
     },[dispatch,id]);
-
+    const updateOrder=()=>{
+        try {
+            if(Object.keys(change).length!==0){
+                dispatch(orderUpdateAction(id,change))
+                updateFlag(1);
+                setTimeout(()=>{
+                    updateFlag(0);
+                },2000)
+            }
+        } catch (error) {
+            
+        }
+    }
+    
     const getDate=(text)=>{
         var a=text.split('T');
         return a[0]
@@ -33,6 +49,10 @@ export default function OrderInfoScreen(){
                 <div className="row text-center">
                     <span className="col">Customer Insurance</span>
                     <span className="col">{order.customerInsuranceInformation}</span>
+                </div>
+                <div className="row text-center">
+                    <span className="col">Customer Contact</span>
+                    <span className="col">{order.customerContact}</span>
                 </div>
                 <div className="row text-center">
                     <span className="col">Date</span>
@@ -60,11 +80,25 @@ export default function OrderInfoScreen(){
                 </div>
                 <div className="row text-center">
                     <span className="col">Payment</span>
-                    <span className="col">{order.Paid}</span>
+                    <div className='col justify-content-around'>
+                        <select className="form-select w-25 text-center mx-auto" aria-label="payment" defaultValue={false} onChange={(e)=>updateChange({...change,paid:e.target.value})}>
+                            <option key={true} value={true}>Paid</option>
+                            <option key={false} value={false}>Not Paid</option>
+                        </select>
+                    </div>
                 </div>
                 <div className="row text-center">
                     <span className="col">Ready for Pickup</span>
-                    <span className="col">{order.ready}</span>
+                    <div className='col'>
+                    <select className="form-select w-25 text-center  mx-auto" aria-label="ready for pickup" defaultValue={false} onChange={(e)=>updateChange({...change,ready:e.target.value})}>
+                        <option key={true} value={true}>Ready</option>
+                        <option key={false} value={false}>Not Ready</option>
+                    </select>
+                    </div>
+                </div>
+                <hr></hr>
+                <div className='row'>
+                    <button className={flag===0?'btn btn-primary w-25 mx-auto':'btn btn-success w-25 mx-auto'} onClick={updateOrder}>Update</button>
                 </div>
                 <hr/>
                 <div className="row text-center">

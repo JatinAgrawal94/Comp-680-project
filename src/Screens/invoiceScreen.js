@@ -4,6 +4,8 @@ import React from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import { medicineRead } from "../actions/medicineActions";
 import { invoiceAction } from "../actions/invoiceActions";
+import Axios from 'axios';
+
 
 export default function InvoiceScreen(){
     const [order,updateOrder]=useState([]);
@@ -12,10 +14,11 @@ export default function InvoiceScreen(){
     const {loading,medicines}=useSelector(state=>state.medicineRead);
     useEffect(()=>{
         dispatch(medicineRead());
-    },[dispatch])
+    },[dispatch])   
     
-    const createInvoice=()=>{
+    const createInvoice=async(e)=>{
         // order + customer information
+        e.preventDefault();
         var fullname=document.getElementById('fullname').value;
         var contact=document.getElementById('contact').value
         var insurance=document.getElementById('insurance').value;
@@ -26,6 +29,7 @@ export default function InvoiceScreen(){
             items:order
         }
         dispatch(invoiceAction(JSON.stringify(sale)));
+       await Axios.put(`http://localhost:5000/api/medicine/reduce`,sale);
     }
 
     const addtoOrder=(e)=>{

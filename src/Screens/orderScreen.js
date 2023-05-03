@@ -40,8 +40,8 @@ export default function OrderScreen(){
                 <div className="col">{getDate(e.createdAt)}</div>
                 <div className="col">{getTime(e.createdAt)}</div>
                 <div className="col">{e.totalPrice}</div>
-                <div className="col">{e.paid}</div>
-                <div className="col">{e.ready}</div>
+                <div className="col">{e.paid?"Paid":"Not Paid"}</div>
+                <div className="col">{e.ready?"Ready":"Not Ready"}</div>
                 <div className='col'><Link to={{pathname:`/orders/${e.id}`}}>More</Link></div>
             </div>
             })
