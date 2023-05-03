@@ -13,12 +13,9 @@ root.render(
   <React.StrictMode>
      <Auth0Provider
     domain="dev-jue5bhlw.us.auth0.com"
-    clientId="xVpguRO2jJBky9D50hLIRVV3jqfFt3rN"
-    
+    clientId="CHhQBxQVwyeixyxg1XZSwMIMex5L76rD"
     authorizationParams={{
       redirect_uri:"https://resplendent-lamington-764aee.netlify.app",
-      clientId:'xVpguRO2jJBky9D50hLIRVV3jqfFt3rN',
-      client_secret:process.env.REACT_APP_AUTH0_SECRET
     }}
   >
     <Provider store={store}>
