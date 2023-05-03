@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import store from "./store"
 import { Auth0Provider } from "@auth0/auth0-react";
+import { processResult } from 'immer/dist/internal';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,8 +14,11 @@ root.render(
      <Auth0Provider
     domain="dev-jue5bhlw.us.auth0.com"
     clientId="xVpguRO2jJBky9D50hLIRVV3jqfFt3rN"
+    
     authorizationParams={{
-      redirect_uri:"https://resplendent-lamington-764aee.netlify.app"
+      redirect_uri:"https://resplendent-lamington-764aee.netlify.app",
+      clientId:xVpguRO2jJBky9D50hLIRVV3jqfFt3rN,
+      client_secret:process.env.REACT_APP_AUTH0_SECRET
     }}
   >
     <Provider store={store}>
