@@ -14,7 +14,7 @@ root.render(
     domain="dev-jue5bhlw.us.auth0.com"
     clientId="xVpguRO2jJBky9D50hLIRVV3jqfFt3rN"
     authorizationParams={{
-      redirect_uri:window.location.origin
+      redirect_uri:"https://resplendent-lamington-764aee.netlify.app"
     }}
   >
     <Provider store={store}>
