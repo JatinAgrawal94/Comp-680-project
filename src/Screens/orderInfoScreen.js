@@ -1,29 +1,28 @@
 import {useSelector,useDispatch} from 'react-redux';
 import React, { useEffect, useState } from "react";
 import { orderReadAction, orderUpdateAction } from '../actions/orderActions';
-
 export default function OrderInfoScreen(){
     var id=window.location.pathname.split('/')[2];
     const dispatch=useDispatch();
     var {order,loading}=useSelector(state=>state.orderRead);
     const [change,updateChange]=useState({});
     const [flag,updateFlag]=useState(0);
-    // console.log(change)
     useEffect(()=>{
         dispatch(orderReadAction(id))
     },[dispatch,id]);
+
     const updateOrder=()=>{
         try {
             if(Object.keys(change).length!==0){
+                change.customerContact=order.customerContact;
+                change.customerName=order.customerName;
                 dispatch(orderUpdateAction(id,change))
                 updateFlag(1);
                 setTimeout(()=>{
                     updateFlag(0);
                 },2000)
             }
-        } catch (error) {
-            
-        }
+        } catch (error) {}
     }
     
     const getDate=(text)=>{
@@ -81,7 +80,7 @@ export default function OrderInfoScreen(){
                 <div className="row text-center">
                     <span className="col">Payment</span>
                     <div className='col justify-content-around'>
-                        <select className="form-select w-25 text-center mx-auto" aria-label="payment" defaultValue={false} onChange={(e)=>updateChange({...change,paid:e.target.value})}>
+                        <select className="form-select w-25 text-center mx-auto" aria-label="payment" defaultValue={order.paid} onChange={(e)=>updateChange({...change,paid:e.target.value})}>
                             <option key={true} value={true}>Paid</option>
                             <option key={false} value={false}>Not Paid</option>
                         </select>
@@ -90,10 +89,18 @@ export default function OrderInfoScreen(){
                 <div className="row text-center">
                     <span className="col">Ready for Pickup</span>
                     <div className='col'>
-                    <select className="form-select w-25 text-center  mx-auto" aria-label="ready for pickup" defaultValue={false} onChange={(e)=>updateChange({...change,ready:e.target.value})}>
+                    <select className="form-select w-25 text-center  mx-auto" aria-label="ready for pickup" defaultValue={order.ready} onChange={(e)=>updateChange({...change,ready:e.target.value})}>
                         <option key={true} value={true}>Ready</option>
                         <option key={false} value={false}>Not Ready</option>
                     </select>
+                    </div>
+                </div>
+                <div className='row text-center'>
+                    <span className='col'>Time taken to prepare the order</span>
+                    <div className='col'>
+                        <input className='form-control w-25 text-center mx-auto' type="number" placeholder="Time in Minutes" onChange={(e)=>{updateChange({...change,timetaken:e.target.value})}}
+                        defaultValue={order.timetaken!==undefined?order.timetaken:null}
+                        />
                     </div>
                 </div>
                 <hr></hr>
